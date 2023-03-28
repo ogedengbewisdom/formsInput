@@ -25,6 +25,7 @@ const useBasicInput = (checkError) => {
 
     return {
         value,
+        valueIsValid,
         valueIsInValid,
         valueChangeHandler,
         valueBlurHandler,
