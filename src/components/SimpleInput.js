@@ -1,15 +1,15 @@
 import { useState } from "react";
 
 const SimpleInput = (props) => {
-
+  
   const [enteredName, setEnteredName] = useState("")
-  const [enteredNameTouch, setEnteredNameTouch] = useState(null)
+  const [entredNameTouch, setEnteredNameTouch] = useState(null)
+
   const [enteredEmail, setEnteredEmail] = useState("")
   const [enteredEmailTouch, setEnteredEmailTouch] = useState(null)
 
-
-   const enteredNameValid = enteredName.trim() !== ""
-   const nameIsinvalid = !enteredNameValid && enteredNameTouch
+  const enteredNameValid = enteredName.trim() !== ""
+  const nameIsinvalid = !enteredNameValid && entredNameTouch
 
    const enteredEmailValid = enteredEmail.trim().includes("@")
    const emailIsInValid = !enteredEmailValid && enteredEmailTouch
@@ -20,16 +20,16 @@ const SimpleInput = (props) => {
     formIsValid = true
    }
 
-  const nameHandler = (event) => {
+   const nameHandler = (event) => {
     setEnteredName(event.target.value)
-  }
-
-  const validNameHandler = (event) => {
-    setEnteredNameTouch(true)
   }
 
   const emailHandler = (event) => {
     setEnteredEmail(event.target.value)
+  }
+
+  const validNameHandler = () => {
+    setEnteredNameTouch(true)
   }
 
   const validEmailHandler = () => {
@@ -51,15 +51,16 @@ const SimpleInput = (props) => {
     }
     
     console.log(data)
-    setEnteredName("")
     setEnteredEmail("")
-    setEnteredNameTouch(false)
     setEnteredEmailTouch(false)
+
+    setEnteredName("")
+    setEnteredNameTouch(false)
     
   }
   
-  const namevalidclasses = nameIsinvalid ? "form-control invalid" : "form-control"
   const emailvalidclasses = emailIsInValid ? "form-control invalid" : "form-control"
+  const namevalidclasses = nameIsinvalid ? "form-control invalid" : "form-control"
   return (
     <form onSubmit={submitHandler}>
       <div className={namevalidclasses}>
