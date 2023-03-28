@@ -17,15 +17,18 @@ const useInput = (checkValue) => {
     } 
 
     const reset = () => {
+        setEnteredValue("")
         setIsTouch(false)
     }
 
     return {
         enteredValueIsInvalid,
         enteredValue,
-        isTouch,
+        enteredValueIsValid,
         changeValueHandler,
         changeBlurHandler,
         reset,
     }
 }
+
+export default useInput
