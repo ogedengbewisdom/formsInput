@@ -19,20 +19,6 @@ const {
   reset: resetlastName
 } = useBasicInput(value => value.trim() !== "") 
 
-  // const [firstName, setFirstName] = useState("")
-  // const [firstNameTouched, setFirstNameTouched] = useState(null)
-
-  // const firstNameIsValid = firstName.trim() !== ""
-  // const firstNameIsInValid = !firstNameIsValid && firstNameTouched
-
-
-  // const firstNameChangeHandler = (event) => {
-  //   setFirstName(event.target.value)
-  // }
-
-  // const firstNameBlurHandler = () => {
-  //   setFirstNameTouched(true)
-  // }
 
   const submitHandler = (event) => {
     event.preventDefault()
