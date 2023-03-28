@@ -30,6 +30,11 @@ const {
   reset: resetemail
 } = useBasicInput(value => value.trim().includes("@")) 
 
+let formIsValid = false
+
+if (firstNameIsValid && lastNameIsValid && emailIsValid) {
+  formIsValid = true
+}
 
   const submitHandler = (event) => {
     event.preventDefault()
@@ -93,7 +98,7 @@ const {
          {emailIsInValid && <p className="error-text">Please enter a valid E-mail!</p>}
       </div>
       <div className='form-actions'>
-        <button>Submit</button>
+        <button disabled={!formIsValid}>Submit</button>
       </div>
     </form>
   );
