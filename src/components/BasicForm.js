@@ -1,30 +1,58 @@
-import { useState } from "react";
+// import { useState } from "react";
+import useBasicInput from "../hooks/useBasicInput";
 
 const BasicForm = (props) => {
 
-  const [firstName, setFirstName] = useState("")
-  const [firstNameTouched, setFirstNameTouched] = useState(null)
+  const {
+    value: firstName,
+    valueIsInValid: firstNameIsInValid,
+    valueChangeHandler: firstNameChangeHandler,
+    valueBlurHandler: firstNameBlurHandler,
+    reset: resetFirstName
+} = useBasicInput(value => value.trim() !== "") 
 
-  const firstNameIsValid = firstName.trim() !== ""
-  const firstNameIsInValid = !firstNameIsValid && firstNameTouched
+const {
+  value: lastName,
+  valueIsInValid: lastNameIsInValid,
+  valueChangeHandler: lastNameChangeHandler,
+  valueBlurHandler: lastNameBlurHandler,
+  reset: resetlastName
+} = useBasicInput(value => value.trim() !== "") 
+
+  // const [firstName, setFirstName] = useState("")
+  // const [firstNameTouched, setFirstNameTouched] = useState(null)
+
+  // const firstNameIsValid = firstName.trim() !== ""
+  // const firstNameIsInValid = !firstNameIsValid && firstNameTouched
 
 
-  const firstNameChangeHandler = (event) => {
-    setFirstName(event.target.value)
-  }
+  // const firstNameChangeHandler = (event) => {
+  //   setFirstName(event.target.value)
+  // }
 
-  const firstNameBlurHandler = () => {
-    setFirstNameTouched(true)
-  }
+  // const firstNameBlurHandler = () => {
+  //   setFirstNameTouched(true)
+  // }
 
   const submitHandler = (event) => {
     event.preventDefault()
-    console.log(firstName)
-    setFirstName("")
-    setFirstNameTouched(false)
+
+    if (!firstName || !lastName) {
+      return;
+    } else {
+      const data = {
+        "First Name": firstName,
+        "Last Name": lastName
+      }
+      console.log(data)
+      resetFirstName()
+      resetlastName()
+    }
+    
   }
 
   const firstNameValidClass = firstNameIsInValid ? "form-control invalid" : "form-control"
+  const lastNameValidClass = lastNameIsInValid ? "form-control invalid" : "form-control"
 
   return (
     <form onSubmit={submitHandler}>
@@ -38,12 +66,19 @@ const BasicForm = (props) => {
            onBlur={firstNameBlurHandler}
            value={firstName} 
            />
-           {firstNameIsInValid && <p className="error-text">Please enter your first name</p>}
+           {firstNameIsInValid && <p className="error-text">Please enter your first name!</p>}
         </div>
         
-        <div className='form-control'>
+        <div className={lastNameValidClass}>
           <label htmlFor='name'>Last Name</label>
-          <input type='text' id='name' />
+          <input
+           type='text' 
+           id='name'
+           value={lastName}
+           onChange={lastNameChangeHandler}
+           onBlur={lastNameBlurHandler}
+            />
+            {lastNameIsInValid && <p className="error-text">Please enter your last name!</p>}
         </div>
       </div>
       <div className='form-control'>
